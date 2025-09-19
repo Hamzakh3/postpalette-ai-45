@@ -16,7 +16,11 @@ import {
   History,
   RefreshCw,
   Filter,
-  Search
+  Search,
+  Bell,
+  LogOut,
+  MessageSquare,
+  Send
 } from "lucide-react";
 
 const AdminDashboard = () => {
@@ -35,7 +39,8 @@ const AdminDashboard = () => {
       platform: "Instagram",
       contentType: "Carousel Post",
       revisionCount: 0,
-      aiPrompt: "Create engaging summer campaign content highlighting our new product features with bright, energetic tone"
+      aiPrompt: "Create engaging summer campaign content highlighting our new product features with bright, energetic tone",
+      feedback: []
     },
     {
       id: 2,
@@ -48,7 +53,10 @@ const AdminDashboard = () => {
       platform: "LinkedIn",
       contentType: "Single Post",
       revisionCount: 1,
-      aiPrompt: "Professional LinkedIn post about new software features, business-focused tone"
+      aiPrompt: "Professional LinkedIn post about new software features, business-focused tone",
+      feedback: [
+        { id: 1, message: "Please make the tone more casual and add more emojis", date: "2024-01-14", type: "revision" }
+      ]
     },
     {
       id: 3,
@@ -61,7 +69,11 @@ const AdminDashboard = () => {
       platform: "Facebook",
       contentType: "Video Post",
       revisionCount: 2,
-      aiPrompt: "Customer testimonial content, emotional and inspiring tone"
+      aiPrompt: "Customer testimonial content, emotional and inspiring tone",
+      feedback: [
+        { id: 1, message: "Add more customer quotes", date: "2024-01-13", type: "revision" },
+        { id: 2, message: "Perfect! Ready to go live", date: "2024-01-14", type: "approval" }
+      ]
     },
     {
       id: 4,
@@ -74,7 +86,8 @@ const AdminDashboard = () => {
       platform: "Twitter",
       contentType: "Thread",
       revisionCount: 0,
-      aiPrompt: "Industry analysis thread, thought leadership tone with data points"
+      aiPrompt: "Industry analysis thread, thought leadership tone with data points",
+      feedback: []
     }
   ];
 
@@ -127,13 +140,12 @@ const AdminDashboard = () => {
             <p className="text-muted-foreground">Review and manage content creation tasks</p>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="outline">
-              <Filter className="h-4 w-4 mr-2" />
-              Filter
+            <Button variant="outline" size="icon">
+              <Bell className="h-4 w-4" />
             </Button>
-            <Button className="btn-hero">
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Refresh Queue
+            <Button variant="outline" onClick={() => window.location.href = "/login"}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
             </Button>
           </div>
         </div>
@@ -257,6 +269,20 @@ const AdminDashboard = () => {
                         {selectedTask.priority}
                       </p>
                     </div>
+                    <div>
+                      <span className="text-sm font-medium text-muted-foreground">Due Date:</span>
+                      <p className="text-sm">{selectedTask.dueDate}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-muted-foreground">Submitted:</span>
+                      <p className="text-sm">{selectedTask.submittedDate}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-muted-foreground">AI Prompt:</span>
+                      <p className="text-sm bg-muted/30 p-2 rounded text-muted-foreground italic">
+                        {selectedTask.aiPrompt}
+                      </p>
+                    </div>
                   </div>
                 </Card>
 
@@ -293,9 +319,18 @@ const AdminDashboard = () => {
                 <Card className="p-6">
                   <h3 className="text-lg font-semibold mb-4">Content Preview</h3>
                   <div className="bg-muted/30 p-4 rounded-lg mb-4">
-                    <p className="text-sm italic text-muted-foreground">
-                      AI-generated content would appear here...
+                    <p className="text-sm font-medium mb-2">AI-Generated Content:</p>
+                    <p className="text-sm italic text-muted-foreground mb-3">
+                      "🌟 Ready to revolutionize your summer workflow? Our new features are designed to boost your productivity by 40%! From seamless integrations to enhanced security, we're bringing you the future of work. Join thousands of satisfied customers who've already made the switch! #Innovation #Productivity"
                     </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="aspect-square bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg flex items-center justify-center">
+                        <span className="text-xs text-muted-foreground">Canva Design 1</span>
+                      </div>
+                      <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
+                        <span className="text-xs text-muted-foreground">Generated Image</span>
+                      </div>
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <Button className="w-full btn-hero">
@@ -303,14 +338,38 @@ const AdminDashboard = () => {
                       Approve & Send to User
                     </Button>
                     <Button variant="outline" className="w-full">
-                      <AlertTriangle className="h-4 w-4 mr-2" />
-                      Request Changes
-                    </Button>
-                    <Button variant="outline" className="w-full">
                       <Eye className="h-4 w-4 mr-2" />
                       Preview in Canva
                     </Button>
                   </div>
+                </Card>
+
+                {/* Feedback & Revisions */}
+                <Card className="p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <MessageSquare className="h-5 w-5 text-accent" />
+                    <h3 className="text-lg font-semibold">User Feedback & Revisions</h3>
+                  </div>
+                  {selectedTask.feedback && selectedTask.feedback.length > 0 ? (
+                    <div className="space-y-3">
+                      {selectedTask.feedback.map((item) => (
+                        <div key={item.id} className="p-3 bg-muted/30 rounded-lg">
+                          <div className="flex items-center gap-2 mb-1">
+                            <Badge className={item.type === 'revision' ? 'status-review' : 'status-approved'}>
+                              {item.type === 'revision' ? 'Revision Request' : 'Approved'}
+                            </Badge>
+                            <span className="text-xs text-muted-foreground">{item.date}</span>
+                          </div>
+                          <p className="text-sm">{item.message}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-4">
+                      <MessageSquare className="h-8 w-8 mx-auto mb-2 text-muted-foreground opacity-50" />
+                      <p className="text-sm text-muted-foreground">No feedback yet</p>
+                    </div>
+                  )}
                 </Card>
 
                 {/* Revision History */}

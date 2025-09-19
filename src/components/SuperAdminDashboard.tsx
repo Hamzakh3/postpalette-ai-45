@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { 
   Users, 
   BarChart3, 
@@ -16,10 +17,20 @@ import {
   Calendar,
   FileText,
   AlertCircle,
-  CheckCircle
+  CheckCircle,
+  Bell,
+  ChevronDown,
+  LogOut,
+  Clock,
+  Eye,
+  Edit,
+  Plus
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SuperAdminDashboard = () => {
+  const navigate = useNavigate();
+  
   // Mock data for super admin
   const stats = {
     totalUsers: 247,
@@ -51,6 +62,26 @@ const SuperAdminDashboard = () => {
     { id: 4, type: "system", message: "System backup completed successfully", time: "8 hours ago" },
   ];
 
+  const adminTasks = [
+    { id: 1, title: "Summer Campaign Launch", client: "TechCorp Inc.", status: "pending", assignedTo: "Sarah Johnson", dueDate: "2024-01-15" },
+    { id: 2, title: "Product Feature Highlight", client: "StartupXYZ", status: "need_edits", assignedTo: "Mike Chen", dueDate: "2024-01-16" },
+    { id: 3, title: "Customer Success Story", client: "Enterprise Co", status: "ready", assignedTo: "Lisa Rodriguez", dueDate: "2024-01-17" },
+    { id: 4, title: "Industry Insights", client: "ConsultingPro", status: "pending", assignedTo: "David Kim", dueDate: "2024-01-18" },
+  ];
+
+  const getTaskStatusBadge = (status: string) => {
+    switch (status) {
+      case 'pending':
+        return <Badge className="status-review">Pending</Badge>;
+      case 'need_edits':
+        return <Badge className="status-draft">Need Edits</Badge>;
+      case 'ready':
+        return <Badge className="status-approved">Ready for User</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
+    }
+  };
+
   const getActivityIcon = (type: string) => {
     switch (type) {
       case 'user_signup':
@@ -76,14 +107,28 @@ const SuperAdminDashboard = () => {
             <p className="text-muted-foreground">System-wide oversight and management</p>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="outline">
-              <FileText className="h-4 w-4 mr-2" />
-              Generate Report
+            <Button variant="outline" size="icon">
+              <Bell className="h-4 w-4" />
             </Button>
-            <Button className="btn-hero">
-              <UserPlus className="h-4 w-4 mr-2" />
-              Add Admin User
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Shield className="h-4 w-4" />
+                  <span className="hidden sm:inline">Admin Profile</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={() => navigate("/super-admin/settings")}>
+                  <Settings className="h-4 w-4 mr-2" />
+                  Settings
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/login")}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
 
@@ -149,9 +194,10 @@ const SuperAdminDashboard = () => {
           {/* Main Content */}
           <div className="lg:col-span-2">
             <Tabs defaultValue="users" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="users">User Management</TabsTrigger>
                 <TabsTrigger value="admins">Admin Users</TabsTrigger>
+                <TabsTrigger value="tasks">Admin Tasks</TabsTrigger>
                 <TabsTrigger value="analytics">Analytics</TabsTrigger>
                 <TabsTrigger value="billing">Billing</TabsTrigger>
               </TabsList>
@@ -175,7 +221,7 @@ const SuperAdminDashboard = () => {
                           <Badge className={user.status === 'active' ? 'status-approved' : 'status-review'}>
                             {user.status}
                           </Badge>
-                          <Button variant="outline" size="sm">
+                          <Button variant="outline" size="sm" onClick={() => console.log('Manage user:', user.id)}>
                             Manage
                           </Button>
                         </div>
@@ -189,10 +235,12 @@ const SuperAdminDashboard = () => {
                 <Card className="p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-lg font-semibold">Admin Users</h3>
-                    <Button className="btn-hero">
-                      <UserPlus className="h-4 w-4 mr-2" />
-                      Add Admin
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm">
+                        <Plus className="h-4 w-4 mr-2" />
+                        Add Admin
+                      </Button>
+                    </div>
                   </div>
                   <div className="space-y-4">
                     {adminUsers.map(admin => (
@@ -212,8 +260,44 @@ const SuperAdminDashboard = () => {
                             <p className="text-sm font-medium">{admin.tasksCompleted} tasks</p>
                             <Badge className="status-approved">Active</Badge>
                           </div>
+                          <div className="flex gap-2">
+                            <Button variant="outline" size="sm" onClick={() => console.log('View admin:', admin.id)}>
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                            <Button variant="outline" size="sm" onClick={() => console.log('Edit admin:', admin.id)}>
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="tasks" className="space-y-6">
+                <Card className="p-6">
+                  <h3 className="text-lg font-semibold mb-6">Admin Task Oversight</h3>
+                  <div className="space-y-4">
+                    {adminTasks.map(task => (
+                      <div key={task.id} className="flex items-center justify-between p-4 border border-border rounded-lg">
+                        <div className="flex items-center gap-4">
+                          <Clock className="h-5 w-5 text-muted-foreground" />
+                          <div>
+                            <h4 className="font-medium">{task.title}</h4>
+                            <p className="text-sm text-muted-foreground">
+                              {task.client} • Due: {task.dueDate}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              Assigned to: {task.assignedTo}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          {getTaskStatusBadge(task.status)}
                           <Button variant="outline" size="sm">
-                            Edit
+                            <Eye className="h-4 w-4 mr-2" />
+                            View
                           </Button>
                         </div>
                       </div>
@@ -263,10 +347,25 @@ const SuperAdminDashboard = () => {
                       <p className="text-sm text-muted-foreground">Payment Success Rate</p>
                     </div>
                   </div>
-                  <Button className="btn-hero w-full">
-                    <FileText className="h-4 w-4 mr-2" />
-                    Generate Financial Report
-                  </Button>
+                  <div className="space-y-4">
+                    <div className="p-4 border border-border rounded-lg">
+                      <h4 className="font-medium mb-2">Recent Transactions</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>TechCorp Inc. - Professional Plan</span>
+                          <span className="text-success">+$1,299</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>StartupXYZ - Starter Plan</span>
+                          <span className="text-success">+$499</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Enterprise Co - Professional Plan</span>
+                          <span className="text-success">+$1,299</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </Card>
               </TabsContent>
             </Tabs>
@@ -317,28 +416,6 @@ const SuperAdminDashboard = () => {
               </div>
             </Card>
 
-            {/* Quick Actions */}
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
-              <div className="space-y-3">
-                <Button variant="outline" className="w-full justify-start">
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Add Admin User
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Settings className="h-4 w-4 mr-2" />
-                  System Settings
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <FileText className="h-4 w-4 mr-2" />
-                  Export Data
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <AlertCircle className="h-4 w-4 mr-2" />
-                  View Logs
-                </Button>
-              </div>
-            </Card>
           </div>
         </div>
       </div>
