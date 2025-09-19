@@ -17,9 +17,9 @@ const Login = () => {
     e.preventDefault();
     
     // Mock login logic - route based on email
-    if (email.includes("admin@")) {
+    if (email === "admin@demo.com" ) {
       navigate("/admin");
-    } else if (email.includes("superadmin@")) {
+    } else if (email === "superadmin@demo.com") {
       navigate("/super-admin");
     } else {
       navigate("/dashboard");
