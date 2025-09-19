@@ -89,7 +89,7 @@ const SuperAdminSettings = () => {
             <TabsTrigger value="authentication">Authentication</TabsTrigger>
             <TabsTrigger value="system">System</TabsTrigger>
             <TabsTrigger value="billing">Billing</TabsTrigger>
-            <TabsTrigger value="security">Security</TabsTrigger>
+            {/* <TabsTrigger value="security">Security</TabsTrigger> */}
           </TabsList>
 
           {/* Account Configuration */}
@@ -353,7 +353,7 @@ const SuperAdminSettings = () => {
           </TabsContent>
 
           {/* Security Settings */}
-          <TabsContent value="security" className="space-y-6">
+          {/* <TabsContent value="security" className="space-y-6">
             <Card className="p-6">
               <div className="flex items-center gap-2 mb-6">
                 <Shield className="h-5 w-5 text-accent" />
@@ -382,7 +382,7 @@ const SuperAdminSettings = () => {
                 </div>
               </div>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </div>
     </div>
