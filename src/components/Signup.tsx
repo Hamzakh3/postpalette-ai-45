@@ -519,7 +519,7 @@ const Signup = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Zap className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-bold text-gradient-primary">ContentAI Pro</h1>
+            <h1 className="text-2xl font-bold text-secondary">Post Spark</h1>
           </div>
           <h2 className="text-3xl font-bold mb-2">Welcome Onboard</h2>
           <p className="text-muted-foreground">Let's set up your account and customize your experience</p>

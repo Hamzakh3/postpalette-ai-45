@@ -11,6 +11,7 @@ import SuperAdminSettings from "./components/SuperAdminSettings";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Settings from "./components/Settings";
+import ComingSoon from "./components/ComingSoon";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/super-admin" element={<SuperAdminDashboard />} />
           <Route path="/super-admin/settings" element={<SuperAdminSettings />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/settign" element={<Settings />} />
           <Route path="/settign/profile" element={<Settings />} />
           <Route path="/settign/brand-assets" element={<Settings />} />
