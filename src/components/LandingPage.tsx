@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, Zap, Users, Calendar, Brain, Shield, ArrowRight, Star, Quote, Target, Sparkles, TrendingUp, Twitter, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Check, Zap, Users, Calendar, Brain, Shield, ArrowRight, Star, Quote, Target, Sparkles, TrendingUp, Twitter, Instagram, Facebook, Linkedin, Image } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
@@ -87,6 +88,49 @@ const LandingPage = () => {
     }
   ];
 
+  const showcaseProjects = [
+    {
+      title: "TechCorp Launch Campaign",
+      description: "Complete social media strategy for product launch with 500K+ reach",
+      category: "Technology"
+    },
+    {
+      title: "Fashion Week Coverage",
+      description: "Real-time content creation and scheduling across 5 platforms",
+      category: "Fashion"
+    },
+    {
+      title: "Restaurant Brand Revival",
+      description: "Rebranding campaign that increased foot traffic by 150%",
+      category: "Food & Beverage"
+    },
+    {
+      title: "Fitness App Promotion",
+      description: "90-day content series resulting in 10K new app downloads",
+      category: "Health & Fitness"
+    },
+    {
+      title: "E-commerce Holiday Sale",
+      description: "Multi-platform campaign generating $2M in revenue",
+      category: "Retail"
+    },
+    {
+      title: "Non-Profit Awareness",
+      description: "Viral campaign raising $500K for charitable cause",
+      category: "Non-Profit"
+    },
+    {
+      title: "Real Estate Showcase",
+      description: "Property marketing that sold 20 units in 30 days",
+      category: "Real Estate"
+    },
+    {
+      title: "Music Festival Promo",
+      description: "Event promotion reaching 1M+ potential attendees",
+      category: "Entertainment"
+    }
+  ];
+
   const pricingPlans = [
     {
       name: "Starter",
@@ -141,6 +185,9 @@ const LandingPage = () => {
               </button>
               <button onClick={() => scrollToSection('testimonials')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Testimonials
+              </button>
+              <button onClick={() => scrollToSection('our-work')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                Our Work
               </button>
               <button onClick={() => scrollToSection('pricing')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Pricing
@@ -328,6 +375,53 @@ const LandingPage = () => {
               </div>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* Our Work Section */}
+      <section id="our-work" className="container mx-auto px-6 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4 text-secondary">Our Work</h2>
+          <p className="text-xl text-muted-foreground">Showcasing success stories from brands we've helped grow</p>
+        </div>
+        
+        <div className="max-w-6xl mx-auto">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {showcaseProjects.map((project, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <Card className="overflow-hidden hover-lift border-primary/20 h-full">
+                    {/* Image Placeholder */}
+                    <div className="aspect-video bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/10 flex items-center justify-center">
+                      <Image className="h-20 w-20 text-primary/40" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-6">
+                      <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-3">
+                        {project.category}
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-secondary">{project.title}</h3>
+                      <p className="text-muted-foreground text-sm">{project.description}</p>
+                    </div>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex -left-12 bg-card border-primary/20 hover:bg-primary hover:text-secondary" />
+            <CarouselNext className="hidden md:flex -right-12 bg-card border-primary/20 hover:bg-primary hover:text-secondary" />
+          </Carousel>
+          
+          {/* Mobile Navigation Hint */}
+          <div className="md:hidden text-center mt-6 text-sm text-muted-foreground">
+            Swipe to see more projects →
+          </div>
         </div>
       </section>
 
