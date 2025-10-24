@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Check, Zap, Users, Calendar, Brain, Shield, ArrowRight, Star, Quote, Target, Sparkles, TrendingUp, Twitter, Instagram, Facebook, Linkedin, Image } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -562,7 +562,8 @@ const LandingPage = () => {
               <ul className="space-y-2">
                 <li><button onClick={() => scrollToSection('contact')} className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">Contact</button></li>
                 <li><a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">Help Center</a></li>
-                <li><a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">Privacy Policy</a></li>
+                <li><Link to="/privacy-policy" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/accessibility" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">Accessibility</Link></li>
                 <li><a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">Terms of Service</a></li>
               </ul>
             </div>
