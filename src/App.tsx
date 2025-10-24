@@ -12,6 +12,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Settings from "./components/Settings";
 import NotFound from "./pages/NotFound";
+import ComingSoon from "./components/ComingSoon";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import AccessibilityStatement from "./components/AccessibilityStatement";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +26,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<UserDashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />
@@ -33,7 +36,10 @@ const App = () => (
           <Route path="/settign/profile" element={<Settings />} />
           <Route path="/settign/brand-assets" element={<Settings />} />
           <Route path="/settign/plan" element={<Settings />} />
-          <Route path="/settign/billing-history" element={<Settings />} />
+          <Route path="/settign/billing-history" element={<Settings />} /> */}
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/accessibility" element={<AccessibilityStatement />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
