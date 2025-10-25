@@ -596,7 +596,7 @@ const LandingPage = () => {
                 <li><button onClick={() => scrollToSection('testimonials')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Testimonials</button></li>
                 <li><button onClick={() => scrollToSection('our-work')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Our Work</button></li>
                 <li><button onClick={() => scrollToSection('pricing')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Pricing</button></li>
-                <li><button onClick={() => scrollToSection('contact')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Contact</button></li>
+                {/* <li><button onClick={() => scrollToSection('contact')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Contact</button></li> */}
               </ul>
             </div>
 
