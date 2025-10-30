@@ -54,7 +54,7 @@ const LandingPage = () => {
     {
       step: "3",
       title: "Client Approval",
-      description: "You review and approve content before it goes live on social media platforms.",
+      description: "You review and approve content before it goes live on social media platforms",
       icon: Users
     },
     {
@@ -90,53 +90,48 @@ const LandingPage = () => {
   ];
 
   const showcaseProjects = [
-    {
-      title: "TechCorp Launch Campaign",
-      description: "Complete social media strategy for product launch with 500K+ reach",
-      category: "Technology",
-      image: "/assets/images/growth-together.jpg"
-    },
+    
     {
       title: "Fashion Week Coverage",
       description: "Real-time content creation and scheduling across 5 platforms",
       category: "Fashion",
-      image: "/assets/images/growth-together.jpg"
+      image: "/assets/images/work/fashion.jpg"
     },
     {
       title: "Restaurant Brand Revival",
       description: "Rebranding campaign that increased foot traffic by 150%",
       category: "Food & Beverage",
-      image: "/assets/images/growth-together.jpg"
+      image: "/assets/images/work/food.jpg"
     },
     {
       title: "Fitness App Promotion",
       description: "90-day content series resulting in 10K new app downloads",
       category: "Health & Fitness",
-      image: "/assets/images/growth-together.jpg"
+      image: "/assets/images/work/fitness.jpg"
     },
     {
       title: "E-commerce Holiday Sale",
       description: "Multi-platform campaign generating $2M in revenue",
       category: "Retail",
-      image: "/assets/images/growth-together.jpg"
+      image: "/assets/images/work/retail.jpg"
     },
     {
       title: "Non-Profit Awareness",
       description: "Viral campaign raising $500K for charitable cause",
       category: "Non-Profit",
-      image: "/assets/images/growth-together.jpg"
+      image: "/assets/images/work/non-profit.jpg"
+    },
+    {
+      title: "TechCorp Launch Campaign",
+      description: "Real-time content creation and scheduling across 5 platforms",
+      category: "Technology",
+      image: "/assets/images/work/technology.png"
     },
     {
       title: "Real Estate Showcase",
       description: "Property marketing that sold 20 units in 30 days",
       category: "Real Estate",
-      image: "/assets/images/growth-together.jpg"
-    },
-    {
-      title: "Music Festival Promo",
-      description: "Event promotion reaching 1M+ potential attendees",
-      category: "Entertainment",
-      image: growthTogether
+      image: "/assets/images/work/realstate.jpg"
     }
   ];
 
@@ -144,7 +139,7 @@ const LandingPage = () => {
     {
       name: "Starter",
       price: "$500",
-      posts: "20 posts",
+      posts: "10 posts",
       features: [
         "AI-powered content creation",
         "Admin review & editing",
@@ -157,7 +152,7 @@ const LandingPage = () => {
     {
       name: "Professional",
       price: "$1,000",
-      posts: "40 posts",
+      posts: "20 posts",
       features: [
         "AI-powered content creation",
         "Admin review & editing",
@@ -424,8 +419,8 @@ const LandingPage = () => {
                   <Card className="overflow-hidden hover-lift border-primary/20 h-full">
                     {/* Image Placeholder */}
                     <div className="aspect-video bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/10 flex items-center justify-center">
-                      {/* <img src={project.iamge} alt={project.title} className="h-auto w-full text-primary/40" /> */}
-                      <Image className="h-20 w-20 text-primary/40" />
+                      <img src={project.image} alt={project.title} className="h-auto w-full text-primary/40" />
+                      {/* <Image className="h-20 w-20 text-primary/40" /> */}
                     </div>
 
                     {/* Content */}
