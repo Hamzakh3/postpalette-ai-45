@@ -28,7 +28,6 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-semibold mb-4 text-foreground">Information We Collect</h2>
             <p className="mb-4">We collect information that you provide directly to us, including:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Account information (name, email address, password)</li>
               <li>Profile information and preferences</li>
               <li>Content you create, upload, or share through our platform</li>
               <li>Communications with us</li>

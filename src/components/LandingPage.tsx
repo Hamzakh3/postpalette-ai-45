@@ -601,7 +601,7 @@ const LandingPage = () => {
               <ul className="space-y-2">
                 <li><button onClick={() => scrollToSection('contact')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Contact</button></li>
                 <li><button onClick={() => navigate("/accessibility")} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Accessibility</button></li>
-                <li><button onClick={() => navigate('/privacy-policy')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Privacy Policy</button></li>
+                {/* <li><button onClick={() => navigate('/privacy-policy')} className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Privacy Policy</button></li> */}
                 {/* <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Accessibility</a></li>
                 <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Privacy Policy</a></li> */}
                 {/* <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground/100 transition-colors">Terms of Service</a></li> */}
